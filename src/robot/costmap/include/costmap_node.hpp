@@ -11,6 +11,11 @@ class CostmapNode : public rclcpp::Node {
 
   private:
     robot::CostmapCore costmap_;
+    double resolution_;
+    int grid_size_;
+    double inflation_radius_;
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr lidar_sub_;
+    rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr costmap_pub_;
 };
 
-#endif 
+#endif

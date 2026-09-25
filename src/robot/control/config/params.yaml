@@ -1,3 +1,7 @@
-# control_node:
-#   ros__parameters:
-    
+control_node:
+  ros__parameters:
+    lookahead: 0.8       # Aim at a point about 80 cm ahead on the route.
+    max_speed: 0.25      # Metres per second.
+    max_turn_rate: 0.5   # Radians per second.
+    goal_tolerance: 0.25 # Stop within 25 cm of the route endpoint.
+    data_timeout: 3.0    # Stop if any required input stops updating.

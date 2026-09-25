@@ -1,3 +1,11 @@
-# planner_node:
-#   ros__parameters:
-    
+planner_node:
+  ros__parameters:
+    robot_radius: 1.5       # Conservative circle around the lidar for the 2 m robot.
+    occupied_threshold: 100
+    allow_unknown: true    # Permit unexplored cells; prefer observed clear space.
+    unknown_penalty: 3.0
+    cost_weight: 2.0
+    clearance_distance: 0.8 # Prefer extra space beyond the hard footprint boundary.
+    clearance_weight: 3.0
+    goal_tolerance: 0.3
+    replan_period_ms: 1000

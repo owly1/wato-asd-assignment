@@ -1,3 +1,5 @@
-# costmap_node:
-#   ros__parameters:
-
+costmap_node:
+  ros__parameters:
+    resolution: 0.1        # Each square is 10 cm wide.
+    grid_size: 200        # 200 squares = a 20 m x 20 m local map.
+    inflation_radius: 0.5 # Costs fade over 50 cm around an obstacle.

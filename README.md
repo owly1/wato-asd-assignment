@@ -1,5 +1,7 @@
 # WATonomous ASD Admissions Assignment
 
+Implementation, macOS run commands, evidence, and remaining submission steps: [SUBMISSION.md](SUBMISSION.md).
+
 ## Prerequisite Installation
 These steps are to setup the monorepo to work on your own PC. We utilize docker to enable ease of reproducibility and deployability.
 
