@@ -38,7 +38,7 @@ PLATFORM="amd64"
 ./watod ps
 ```
 
-Connect Foxglove to the WebSocket URL printed by the running visualization container (on the tested Mac, `ws://127.0.0.1:10020`), then import [`config/autonomous_demo.json`](config/autonomous_demo.json). Publish a `geometry_msgs/msg/PointStamped` goal on `/goal_point` in the `sim_world` frame. Choose a point clear of obstacles by at least the configured robot radius. The dashboard shows the global map, path, robot pose, camera, and ROS logs.
+Connect Foxglove to the WebSocket URL printed by the running visualization container (on the tested Mac, `ws://127.0.0.1:10020`), then import [`config/autonomous_demo.json`](config/autonomous_demo.json). Publish a `geometry_msgs/msg/PointStamped` goal on `/goal_point` in the `sim_world` frame. Choose a point clear of obstacles by at least the configured robot radius. The dashboard shows the global map, path, robot pose, and camera; use `docker logs -f <robot-container>` in a terminal to watch ROS node logs.
 
 For a command-line example, first get your container name from `./watod ps`; replace `<robot-container>` below:
 

@@ -59,7 +59,7 @@ The container name above is specific to this Mac; other users should use their r
 
 Import `config/autonomous_demo.json` into Foxglove and connect to `ws://127.0.0.1:10020`. The layout shows the global map, planned path, lidar, robot/environment models, and camera. It omits teleoperation controls so manual velocity commands cannot accidentally compete with autonomous commands from the panel.
 
-Foxglove connected successfully after enabling Chrome’s “Apps on device” permission for app.foxglove.dev. The live camera, transforms, and global map were observed. The dashboard includes a goal publisher and ROS logs for monitoring navigation.
+Foxglove connected successfully after enabling Chrome’s “Apps on device” permission for app.foxglove.dev. The live camera, transforms, and global map were observed. The 3D panel can publish a point goal; monitor ROS node logs in a terminal with `docker logs -f`.
 
 Once connected, record the map, planned path, robot movement, and stopping at the goal. A useful additional demonstration would navigate around the central cylinder to a clear destination on its opposite side. Select a clear goal on the map; a goal at (-3, 0) lies on the central cylinder boundary and was rejected in an earlier run.
 
