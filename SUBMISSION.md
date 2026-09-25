@@ -2,13 +2,13 @@
 
 ## Status
 
-Latest result: longer obstacle traversal observed and goal completion confirmed after two fixes, as detailed in the follow-up section. Remaining deliverables: an uninterrupted demo video, GitHub upload, and final submission.
+Latest result: the robot traversed around the central cylinder toward (6, -2), and a later goal command was reported reached after a path-endpoint fix. The public GitHub repository is available. Remaining deliverables are an uninterrupted demo video and the final submission to the required Discord channel.
 
 Implemented the four navigation components in C++ using ROS 2. In a user-run Docker simulation on macOS, the robot planned a route to (-6, 2), followed it, reported goal reached, and stopped. Sending the same goal again correctly reported that it was already reached.
 
-This confirms one short navigation run. A longer run to (6, -2) was attempted through Foxglove: a route appeared and the robot moved around part of the central cylinder, then stopped near (-3.32, -3.30). `/path` became empty and the planner reported no route. This longer run did not complete.
+The short run confirms basic goal following and stopping. In an initial longer run to (6, -2), the robot moved around part of the central cylinder, then stopped near (-3.32, -3.30). `/path` became empty and the planner reported no route. That attempt exposed a clearance issue.
 
-A source change adds a soft clearance cost over 0.8 m beyond the hard footprint boundary, so A* prefers more room for tracking around corners. It also distinguishes blocked-start, blocked-goal, and disconnected-route failures. The Docker rebuild and restart completed. The new diagnostic confirmed that the stopped robot was inside the obstacle-clearance boundary. A fresh simulation run is still required to verify the clearance change. No video is included in this repository yet.
+A source change added a soft clearance cost over 0.8 m beyond the hard footprint boundary, so A* prefers more room for tracking around corners. It also distinguishes blocked-start, blocked-goal, and disconnected-route failures. The subsequent run crossed the obstacle region, as detailed below. No video is included in this repository yet.
 
 ## Data flow
 
@@ -91,13 +91,13 @@ User-provided runtime logs, September 25, 2026:
 - [x] Observe a successful short goal-following run and stop.
 - [x] Observe longer obstacle traversal and verify goal completion after endpoint correction.
 - [ ] Record a video showing the navigation pipeline.
-- [ ] Publish the source in the applicant's GitHub repository.
+- [x] Publish the source in the applicant's GitHub repository.
 - [ ] Submit the repository and video links through the required assignment channel.
 
 AI assistance was used during development and troubleshooting. The applicant should be able to explain the algorithms, parameters, and limitations above.
 
 ## Follow-up run after clearance improvement
 
-After rebuilding and resetting the simulation, the robot traversed around the central cylinder toward (6, -2). Observed odometry progressed to (4.685, -2.408), then (5.7405, -2.1553). This demonstrates the longer obstacle traversal, but the final position was approximately 0.302 m from the requested point.
+After rebuilding and resetting the simulation, the robot traversed around the central cylinder toward (6, -2). Observed odometry progressed to (4.685, -2.408), then (5.7405, -2.1553). This demonstrated longer obstacle traversal, but the final position was approximately 0.302 m from the requested point, just outside the planner's 0.3 m goal tolerance.
 
-A final source correction makes the path end at the exact requested goal rather than its grid-cell center, eliminating the mismatch between controller and planner stopping references. The endpoint correction was rebuilt and verified live. On resuming the goal, the controller followed the route and stopped. Republishing (6, -2) at 09:07:58 EDT produced: `Goal reached; published an empty path to stop control`. The obstacle traversal and final stopping were verified across these runs; a single uninterrupted recorded run remains to be captured.
+A final source correction makes the path end at the exact requested goal rather than its grid-cell center, eliminating the mismatch between controller and planner stopping references. The endpoint correction was rebuilt and verified live. On resuming the goal, the controller followed the route and stopped. Republishing (6, -2) at 09:07:58 EDT produced: `Goal reached; published an empty path to stop control`. A later odometry sample was (5.7919, -2.1083), approximately 0.235 m from the goal. The obstacle traversal and final stopping were verified across these runs; a single uninterrupted recorded run remains to be captured.
